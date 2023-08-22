@@ -1,0 +1,39 @@
+//time complexity O(n)
+//set two pointers at both sides
+//since the shorter height must be 捨棄, if height[left] < height[right],then left++. if height[right] < heigh[left], then right-- (similar approach as the two sums question)
+
+int maxArea(int* height, int heightSize){
+    int left = 0;
+   // printf("%d\n",left);
+    int right = heightSize - 1;
+   // printf("%d\n",right);
+    int bottom = right - left;
+   // printf("%d\n",bottom);
+    int area;
+    int test_area;
+    if(height[right]< height[left]){
+        area = height[right] * bottom;
+    }else{
+        area = height[left] * bottom;
+    }
+   // printf("%d\n",area);
+    while(right != left){
+        if(height[left] < height[right]){
+            left++;      
+        }else{
+            right--;
+        }
+   //     printf("left is %d\n",left);
+     //   printf("right is %d\n",right);
+        bottom = right - left;
+       // printf("bottom is %d\n",bottom);
+        if(height[right]< height[left]){
+            test_area = height[right] * bottom;
+        }else{
+            test_area = height[left] * bottom;
+        }
+        if(test_area > area) area = test_area;
+       // printf("%d\n",test_area);
+    }
+    return area;
+}
