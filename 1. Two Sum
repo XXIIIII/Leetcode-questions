@@ -1,4 +1,5 @@
 // my code 
+//#1 approach
 // time complexity O(n^2)
 int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     int *output = (int *)malloc(2*sizeof(int));
@@ -16,3 +17,12 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
     }
     return NULL;
 }
+
+//#2 approach
+//overall time complexity O(nlogn)
+//first sort the array in ascending order -- O(nlogn)
+//set two pointers at both ends, if  a[left] + a[right] < sum, then left++. if > sum, then right--  ------O(n) since the most will traverse through all elements in the array
+
+//#3 approach
+//use hashing method 
+//time complexity O(n)
