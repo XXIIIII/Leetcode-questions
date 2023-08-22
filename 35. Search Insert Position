@@ -1,0 +1,32 @@
+//use binary search 
+//time complexity O(logn)
+int searchInsert(int* nums, int numsSize, int target){
+    //by using binary search
+    int left = 0;
+    int right = numsSize - 1;
+    int mid = (left + right) / 2;
+    while(left < right){
+        if (nums[mid] == target){
+           // printf("%d\n",mid);
+            return mid;
+        }
+        if(nums[mid] > target){
+            right = mid - 1;
+           // printf("right is %d\n",right);
+        }
+        else{
+            left = mid + 1;
+            //printf("left is %d\n",left);
+        }
+        mid = (left + right) / 2;
+    }
+    if(nums[left] < target){
+        //printf("%d",left + 1);
+        return left+1;
+    }
+    else{
+        //printf("%d",left);
+        return left;
+    }
+    return 0;
+}
