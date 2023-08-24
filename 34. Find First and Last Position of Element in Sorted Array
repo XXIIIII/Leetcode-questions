@@ -1,6 +1,7 @@
 //#1 approach 
 //time complexity O(logn)
 //using binary search, first find the left starting point .After found, set left = left starting point, then use the same way to find the right starting point
+//https://www.geeksforgeeks.org/find-first-and-last-positions-of-an-element-in-a-sorted-array/
 int* searchRange(int* nums, int numsSize, int target, int* returnSize){
     int *output = (int *)malloc(2*sizeof(int));
     output[0] = -1;
