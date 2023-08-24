@@ -1,0 +1,63 @@
+// time complexity O(n)
+//important to visualize the ascending and descending in the set of numbers
+void nextPermutation(int* nums, int numsSize){
+    //at the smallest permutation, the sequence will be in ascending order(small to big)
+    //to move to the next permutation look from the back, if the back one is greater than the one before, set the one before as the pivot, if not, continue to search
+    
+    int count = numsSize - 1;
+    int back;
+    int pivot = -1;
+    
+    int exchange = -1;
+    while (count > 0) {
+        if(nums[count] > nums[count-1]){
+            pivot = count - 1;
+            
+            break;
+        }
+        count--;
+    }
+    int temp;
+    //found pivot, start exchanging
+    //when wanna exchange, exchange the pivot with a number at its back that is greater than the pivot but smaller among the rest checked ones
+    if(pivot != -1) {
+        printf("%d\n",pivot);
+        count = numsSize - 1;
+        while(count != pivot){
+            if(nums[count] > nums[pivot]){
+                if(exchange == -1 || nums[count] < nums[exchange])
+                   exchange = count;
+        
+            }
+            count--;
+        }
+        printf("exchange %d\n",exchange);
+        temp = nums[exchange];
+        nums[exchange] = nums[pivot];
+        nums[pivot] = temp;
+        //after exchanging, reverse the suffix to make it into ascending form (again, visualising will make it easier)
+        count = numsSize - 1;
+        for(int i = pivot + 1; i <= ((numsSize - pivot - 1)/2)  + pivot ; i++){
+            printf("t\n");
+            temp = nums[i];
+            nums[i] = nums[count];
+            nums[count] = temp;
+            count--;
+
+        }
+    }
+    else{
+        printf("here");
+        
+        count = numsSize - 1;
+        for(int i = 0; i <= (numsSize/2) - 1; i++){
+            printf("t\n");
+            temp = nums[i];
+            nums[i] = nums[count];
+            nums[count] = temp;
+            count--;
+
+        }
+    }
+    return nums; 
+}
