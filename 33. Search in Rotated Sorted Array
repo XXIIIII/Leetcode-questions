@@ -1,0 +1,77 @@
+//#1 approach
+//time complexity O(logn)
+//first, find the seperation index (the index where the next number beside it is smaller than it) by binary search, visualize it can be easier(below is visualisation of 中-大-小-中）
+//         1
+//       1
+//     1
+//   1
+//             1
+//           1
+int search(int* nums, int numsSize, int target){
+    int left = 0;
+    int right = numsSize - 1;
+    int ans;
+    printf("%d  %d\n",left, right);
+    int mid;
+    
+    
+    int seperate = -1;
+    if (nums[left] <= nums[right]) seperate = numsSize;
+    while(left <= right && seperate == -1){
+        mid = (left + right) / 2;
+        
+        if(mid + 1 < numsSize && nums[mid] > nums[mid+1]){
+            seperate = mid + 1;
+        } 
+        
+        else{
+            if(mid - 1 >= 0 && nums[mid] < nums[mid-1]){
+            seperate = mid;
+            } 
+
+            else{
+                //seperate = 0;
+                if(nums[mid] < nums[left]){
+                    right = mid - 1;
+                }
+                else{
+                    left = mid + 1;
+                }
+            }
+        }
+      
+        
+
+    }
+    printf("sep is %d\n",seperate);
+    // the seperation index is found, then determine which section the target will be in (中-大 or 小-中) , after that use the ordiary method of binary search to find the target index
+    
+    if(target >= nums[0]){
+        left = 0;
+        right = seperate - 1;
+       // ans = BINARY(nums, 0, seperate-1, target);
+    }
+    else{
+        left = seperate;
+        right = numsSize - 1;
+        //ans = BINARY(nums, seperate, numsSize - 1, target);
+    }
+    
+    while(left <= right){
+        mid = (left + right)/2;
+        if(nums[mid] == target)
+            return mid;
+        if(nums[mid] < target){
+           left = mid + 1;
+        }
+        else{
+            right = mid - 1;
+        }       
+    }
+    return -1;
+}
+
+//#2 approach
+//time complexity O(logn)
+//solve using binary search only once without finding the seperation index : https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/ 
+
