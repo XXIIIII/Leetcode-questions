@@ -22,6 +22,32 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize){
 //overall time complexity O(nlogn)
 //first sort the array in ascending order -- O(nlogn)
 //set two pointers at both ends, if  a[left] + a[right] < sum, then left++. if > sum, then right--  ------O(n) since the most will traverse through all elements in the array
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        sorted_nums = sorted(nums)
+        i = 0
+        j = len(sorted_nums) - 1
+
+        while True:
+            if sorted_nums[i] + sorted_nums[j] == target:
+                ans = [sorted_nums[i], sorted_nums[j]]
+                break
+            elif sorted_nums[i] + sorted_nums[j] > target:
+                j -= 1
+            else:
+                i += 1
+
+        idx = []
+        for i in range(len(nums)):
+            if nums[i] == ans[0] or nums[i] == ans[1]:
+                idx.append(i)         
+        return idx
+
 
 //#3 approach
 //use hashing method 
