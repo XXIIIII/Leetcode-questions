@@ -1,0 +1,15 @@
+Approach #1: Time complexity : O(N * M), where N is the number of strings and M is the length of the longest string
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        shortest_str = min(strs, key=len)
+        count = 0
+        for i in range(len(shortest_str)):
+            for s in strs:
+                if s[i] != strs[0][i]:
+                    return strs[0][:count]
+            count += 1
+        return strs[0][:count]
