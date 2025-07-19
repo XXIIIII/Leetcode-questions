@@ -1,0 +1,37 @@
+# Failed Approach:
+from collections import Counter
+class Solution(object):
+    def checkAna(self, str1, str):
+        temp_counter = Counter(str1)
+        for i in str:
+            if i in temp_counter:
+                temp_counter[i] -= 1
+            else:
+                return False
+            if temp_counter[i] < 0:
+                return False
+        return True
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        ans = []
+        while strs != []:
+            checking_string = strs[0]
+            newCombination = []
+            newCombination.append(strs[0])
+            toRemove = []
+            strs.remove(strs[0])
+            for str in strs:
+                # print('checking: ', str)
+                if len(str) == len(checking_string) and self.checkAna(checking_string, str):
+                    newCombination.append(str)
+                    toRemove.append(str)
+                    # print('added')
+            # print('check end')
+            ans.append(newCombination)
+            for i in toRemove:
+                strs.remove(i)
+        return ans
+                
