@@ -1,0 +1,21 @@
+# O(n) Prefix Sum and Hash table
+# Use congruence modulo k, where (b-a) % k = 0 makes b%k = a%k 
+class Solution(object):
+    def checkSubarraySum(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: bool
+        """
+        sum = 0
+        table = {0:-1}
+        for i in range(len(nums)):
+            sum += nums[i]
+            if sum % k in table and i - table[sum%k] > 1:
+                return True
+                
+            if sum%k not in table:
+                table[sum%k] = i
+
+        return False
+        
