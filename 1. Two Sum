@@ -52,3 +52,19 @@ class Solution(object):
 //#3 approach
 //use hashing method 
 //time complexity O(n)
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        table = {}
+        ans = []
+        for i in range(len(nums)):
+            if target-nums[i] in table:
+                ans.append(table[target-nums[i]])
+                ans.append(i)
+                break
+            table[nums[i]] = i
+        return ans
