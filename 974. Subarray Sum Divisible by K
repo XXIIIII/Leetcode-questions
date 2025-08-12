@@ -1,0 +1,16 @@
+class Solution(object):
+    def subarraysDivByK(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        table = {0:1}
+        count = 0
+        sum = 0
+        for num in nums:
+            sum += num
+            count += table.get(sum%k, 0)
+            table[sum%k] = table.get(sum%k, 0) + 1
+        return count
+        
