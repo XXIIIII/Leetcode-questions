@@ -1,0 +1,18 @@
+# Sliding window O(n)
+class Solution(object):
+    def findMaxAverage(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: float
+        """
+        currsum = sum(nums[:k])
+        max_sum = currsum
+        for i in range(k, len(nums)):
+            currsum += nums[i]
+            currsum -= nums[i-k]
+            if currsum > max_sum:
+                max_sum = currsum
+    
+        return max_sum/float(k)
+                
