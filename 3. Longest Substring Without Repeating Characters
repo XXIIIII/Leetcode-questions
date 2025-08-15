@@ -16,6 +16,27 @@ class Solution(object):
             length = right - left + 1
             max_length = max(length, max_length)
         return max_length
+
+# Approach 2: Sliding window + Hash last position
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        left = 0
+        max_length = 0
+        char_table = {}
+        for right in range(len(s)):
+            if s[right] in char_table and char_table[s[right]] >= left:
+                left = char_table[s[right]] + 1
+            char_table[s[right]] = right
+            length = right - left + 1
+            max_length = max(length, max_length)
     
+        return max_length
+    
+
+        
 
         
