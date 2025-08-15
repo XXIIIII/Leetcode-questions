@@ -1,0 +1,21 @@
+# Approach 1: Sliding window + Set method 
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        left = 0
+        max_length = 0
+        char_set = set() # Imagine char_set as a sliding window
+        for right in range(len(s)):
+            while s[right] in char_set:
+                char_set.remove(s[left])
+                left += 1
+            char_set.add(s[right])
+            length = right - left + 1
+            max_length = max(length, max_length)
+        return max_length
+    
+
+        
