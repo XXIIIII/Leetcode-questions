@@ -1,0 +1,35 @@
+# Stack approach
+class Solution(object):
+    def largestRectangleArea(self, heights):
+        """
+        :type heights: List[int]
+        :rtype: int
+        """
+        nearest_right_smaller = [-1]*len(heights)
+        nearest_left_smaller = [-1]*len(heights)
+        stack = []
+        max_area = 0
+        # find nearest smaller to the right, -1 means there is no nearest smaller to the right
+        for i in range(len(heights)):
+            while stack and heights[i] < heights[stack[-1]]:
+                index = stack.pop()
+                nearest_right_smaller[index] = i
+            stack.append(i)
+
+        stack = []
+        # find nearest smaller to the left, -1 means there is no nearest smaller to the left
+        for i in range(len(heights)):
+            while stack and heights[i] < heights[stack[-1]]:
+                stack.pop()
+            if stack:
+                nearest_left_smaller[i] = stack[-1]
+            stack.append(i)
+            
+            
+        # calculate area
+        for i in range(len(heights)):
+            if nearest_right_smaller[i] == -1:
+                nearest_right_smaller[i] = len(heights)
+            max_area = max(max_area, heights[i] * (nearest_right_smaller[i]-nearest_left_smaller[i]-1))
+            
+        return max_area
