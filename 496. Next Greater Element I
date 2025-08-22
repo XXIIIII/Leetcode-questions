@@ -1,0 +1,24 @@
+# traverse from back of array and use monotonic decreasing stack
+class Solution(object):
+    def nextGreaterElement(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        stack = []
+        table = {}
+        ans = []
+        for n in reversed(nums2):
+            while stack and stack[-1] <= n:
+                stack.pop()
+            if stack:
+                table[n] = stack[-1]
+            else:
+                table[n] = -1
+            stack.append(n)   
+            
+        for n in nums1:
+            ans.append(table[n])
+        
+        return ans
