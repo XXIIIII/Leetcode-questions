@@ -1,0 +1,18 @@
+# Heap sort O(nlogk)
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        counter = Counter(nums)
+        heap = []
+        for num, freq in counter.items():
+            if len(heap) < k:  # left k elements in the heap (with top k frequency)
+                heapq.heappush(heap, (freq, num)) # it will sort according to freq, which means the head will have the min frequeny
+            else:
+                heapq.heappushpop(heap, (freq, num))
+        return [item[1] for item in heap]
+
+        
