@@ -1,0 +1,14 @@
+# Heap sort, O(Nlogk) time complexity
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        heap = []
+        for num in nums:
+            heapq.heappush(heap, num) # default is min heap
+        while len(heap) > k:
+            heapq.heappop(heap)
+        return heap[0]
