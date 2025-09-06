@@ -1,0 +1,27 @@
+# DFS + Stack approach 
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def binaryTreePaths(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: List[str]
+        """
+        res = []
+        if not root:
+            return res
+        stack = [(root, str(root.val))]
+        while stack: # do it level by level, first level be root
+            node, path = stack.pop() # when processing third level, the path popped will be (a -> b -> c)
+            if not node.left and not node.right: # if it's a leaf
+                res.append(path)
+            if node.left:
+                stack.append((node.left, path + "->" + str(node.left.val)))
+            if node.right:
+                stack.append((node.right, path + "->" + str(node.right.val)))
+        return res
+        
