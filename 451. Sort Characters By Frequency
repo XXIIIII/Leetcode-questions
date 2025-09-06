@@ -1,0 +1,18 @@
+# Max heap approach
+class Solution(object):
+    def frequencySort(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        counter = Counter(s)
+        heap = []
+        ans = ''
+        for char, freq in counter.items():
+            heapq.heappush(heap, (-1*freq, char)) # to create a max heap, multiply with -1
+        while heap:
+            freq, char = heapq.heappop(heap)
+            ans += char * (-1*freq)
+            
+        return ans
+                
