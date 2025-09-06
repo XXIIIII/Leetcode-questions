@@ -1,0 +1,32 @@
+# Inorder Traversal using stack 
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution(object):
+    def kthSmallest(self, root, k):
+        """
+        :type root: Optional[TreeNode]
+        :type k: int
+        :rtype: int
+        """
+        stack = []
+        count = 0
+        curr = root
+        while count < k:
+            while curr: # stop when curr is Null
+                stack.append(curr)
+                curr = curr.left   
+            curr = stack.pop() # pop (the parent of the null node)
+            if count == k-1:
+                ans = curr.val  
+            count += 1
+            curr = curr.right # if curr.right(the new curr) is Null, it will next pop it's parent
+        return ans
+
+
+                
+
+        
