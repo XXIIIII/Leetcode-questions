@@ -1,0 +1,15 @@
+# Recursive dfs
+class Solution(object):
+    def isUnivalTree(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: bool
+        """
+        self.value = root.val
+        def traverse(node):
+            if not node:
+                return True
+            if node.val != self.value:
+                return False
+            return traverse(node.left) and traverse(node.right) # uses and here as the true and false directly affects the returned output
+        return traverse(root)
