@@ -40,6 +40,32 @@ class Solution(object):
             return InOrder(node.left) + [node.val] + InOrder(node.right)
         sorted_arr = InOrder(root)
         return sorted_arr[k-1]
+
+# Inorder Traversal using recursion with early stopping
+class Solution(object):
+    def kthSmallest(self, root, k):
+        """
+        :type root: Optional[TreeNode]
+        :type k: int
+        :rtype: int
+        """
+        self.k = k
+        self.result = None
+        
+        def inOrder(node):
+            if not node or self.result is not None:
+                return None
+            inOrder(node.left)
+            self.k -= 1
+            if self.k == 0:
+                self.result = node.val
+                return None
+            inOrder(node.right)
+            return None
+        
+        inOrder(root)
+        return self.result
+
             
         
 
