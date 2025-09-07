@@ -1,0 +1,22 @@
+# DFS with recursion
+class Solution(object):
+    def minDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        if not root:
+            return 0
+        self.min_depth = float('inf')
+
+        def traverse(node, curr_depth):
+            if not node:
+                return None
+            if not node.left and not node.right: # if the node is a leaf
+                if curr_depth < self.min_depth:
+                    self.min_depth = curr_depth
+                    return None
+            return traverse(node.left, curr_depth+1) or traverse(node.right, curr_depth+1)
+        traverse(root, 1)
+        return self.min_depth
+        
