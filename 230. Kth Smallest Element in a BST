@@ -26,6 +26,28 @@ class Solution(object):
             curr = curr.right # if curr.right(the new curr) is Null, it will next pop it's parent
         return ans
 
+# Inorder Traversal using recursion 
+class Solution(object):
+    def kthSmallest(self, root, k):
+        """
+        :type root: Optional[TreeNode]
+        :type k: int
+        :rtype: int
+        """
+        def InOrder(node):
+            if not node:
+                return []
+            return InOrder(node.left) + [node.val] + InOrder(node.right)
+        sorted_arr = InOrder(root)
+        return sorted_arr[k-1]
+            
+        
+
+    
+                
+
+        
+
 
                 
 
