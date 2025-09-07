@@ -1,0 +1,17 @@
+# Recursion
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: List[int]
+        """
+        self.ans = []
+        def traverse(node):
+            if not node:
+                return None
+            traverse(node.left) # will traverse until it reaches the leftest node's child(NULL) and then it will return None, then the code below this line will execute for the leftest leaf, then backtrack to its parents
+            self.ans.append(node.val)
+            traverse(node.right)
+            return None
+        traverse(root)
+        return self.ans
