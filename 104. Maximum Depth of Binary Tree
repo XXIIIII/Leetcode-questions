@@ -1,0 +1,19 @@
+# Recursion
+class Solution(object):
+    def maxDepth(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        self.max = 0
+
+        def findDepth(node, depth):
+            if not node:
+                return None
+            if depth > self.max:
+                self.max = depth
+            return findDepth(node.left, depth+1) or findDepth(node.right, depth+1)
+
+        findDepth(root, 1)
+        return self.max
+        
