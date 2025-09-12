@@ -1,0 +1,25 @@
+# Recursion (code is a bit messy, can be cleaned up)
+class Solution(object):
+    def diameterOfBinaryTree(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: int
+        """
+        self.max = 0
+        def treeLength(node):
+            if not node:
+                return 0
+            left_length = 0
+            right_length = 0
+            if node.left:
+                left_length += 1
+                left_length += treeLength(node.left) 
+            if node.right:
+                right_length += 1
+                right_length += treeLength(node.right) 
+            self.max = max(self.max, left_length+right_length) 
+            return max(left_length, right_length)
+
+        treeLength(root)    
+        return self.max
+        
